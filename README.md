@@ -66,23 +66,24 @@ The project is organized as follows:
    ```bash
    git clone <repository-url>
    cd snipetech-app-backend
-```
+  ```
 
 2. Install dependencies:
-	```
+	```bash
 	npm install
 	```
 
 3. Configurations 
 	Create a .env file in the root directory. Add the following configuratio	n variables, replacing the placeholders with your actual values:
-	```[200~DATABASE_URL=your-database-connection-url
-	PORT=3000
+	```bash
+  DATABASE_URL=your-database-connection-url
+      PORT=3000
 	 ```
 
 4. Running the Application
 	To start the server, run:
-	```
-	[200~npm start
+	```bash
+	    npm start
 	```
 
 5. Contributing
