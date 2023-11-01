@@ -1,12 +1,35 @@
 {
   "name": "sniptechnode",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is the backend for the SnipeTech app, built using Node.js, Express, and Prisma. It provides the server-side functionality for the SnipeTech application.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Dennis Ngari",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ngaridennis33/sniptechBackend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ngaridennis33/sniptechBackend/issues"
+  },
+  "homepage": "https://github.com/ngaridennis33/sniptechBackend#readme",
+  "devDependencies": {
+    "@types/config": "^3.3.2",
+    "@types/express": "^4.17.20",
+    "@types/node": "^20.8.10",
+    "prisma": "^5.5.2",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.5.2",
+    "config": "^3.3.9",
+    "dotenv": "^16.3.1",
+    "envalid": "^8.0.0",
+    "express": "^4.18.2",
+    "redis": "^4.6.10"
+  }
 }
