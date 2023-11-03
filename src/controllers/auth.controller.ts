@@ -93,6 +93,20 @@ export const loginUserHandler = async (
       { id: true, email: true, verified: true, password: true }
     );
 
+    if (!user) {
+      return next(new AppError(400, 'Invalid email or password'));
+    }
+
+    // Check if user is verified
+    if (!user.verified) {
+      return next(
+        new AppError(
+          401,
+          'You are not verified, please verify your email to login'
+        )
+      );
+    }
+
     if (!user || !(await bcrypt.compare(password, user.password))) {
       return next(new AppError(400, 'Invalid email or password'));
     }
@@ -115,6 +129,8 @@ export const loginUserHandler = async (
   }
 };
 
+
+// Refresh Tokens 
 export const refreshAccessTokenHandler = async (
   req: Request,
   res: Response,
