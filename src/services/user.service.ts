@@ -18,7 +18,7 @@ export const findUser = async (
   select?: Prisma.UserSelect
 ) => {
   return (await prisma.user.findFirst({
-    where,
+    // where,
     select,
   })) as User;
 };

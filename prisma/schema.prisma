@@ -14,8 +14,12 @@ model User{
   id String  @id @default(uuid())
   name String  @db.VarChar(255)
   email String @unique
-  photo String? @default("default.png")
+  image String? @default("default.png")
   verified Boolean? @default(false) 
+  accounts      Account[]
+  sessions      Session[]
+  Post          Post[]
+  Comment       Comment[]
   
   password String
   role RoleEnumType? @default(user)
@@ -36,4 +40,65 @@ model User{
 enum RoleEnumType {
   user
   admin
+}
+
+model Account {
+  id                String       @id @default(uuid()) @map("_id")
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Post {
+  id        String    @id @default(uuid()) @map("_id")
+  createdAt DateTime  @default(now())
+  slug      String    @unique
+  title     String
+  desc      String
+  img       String?
+  views     Int       @default(0)
+  catSlug   String
+  cat       Category  @relation(fields: [catSlug], references: [slug])
+  userEmail String
+  user      User      @relation(fields: [userEmail], references: [email])
+  comments  Comment[]
+}
+
+model Session {
+  id           String   @id @default(uuid()) @map("_id")
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Category {
+  id      String  @id @default(uuid()) @map("_id")
+  slug    String  @unique
+  title   String
+  desc    String
+  img     String[]
+  Posts   Post[]
+}
+
+model Comment {
+  id        String   @id @default(uuid()) @map("_id")
+  createdAt DateTime @default(now())
+  desc      String
+  userEmail String
+  user      User     @relation(fields: [userEmail], references: [email])
+  postSlug  String
+  post      Post     @relation(fields: [postSlug], references: [slug])
 }

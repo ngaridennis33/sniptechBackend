@@ -29,13 +29,18 @@ async function bootstrap() {
   app.use(cookieParser());
 
   // 2. Cors
+  // app.use(
+  //   cors({
+  //     origin: [config.get<string>('origin')],
+  //     credentials: true,
+  //   })
+  // );
   app.use(
     cors({
-      origin: [config.get<string>('origin')],
+      origin: 'http://localhost:3000',  // Allow requests from http://localhost:3000
       credentials: true,
     })
   );
-
   // 3. Logger
   if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 

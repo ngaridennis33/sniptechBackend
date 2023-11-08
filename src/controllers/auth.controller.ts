@@ -38,12 +38,16 @@ const refreshTokenCookieOptions: CookieOptions = {
   maxAge: config.get<number>('refreshTokenExpiresIn') * 60 * 1000,
 };
 
+
+// Register a new user
 export const registerUserHandler = async (
   req: Request<{}, {}, RegisterUserInput>,
   res: Response,
   next: NextFunction
 ) => {
+
   try {
+    console.log(req.body)
     const hashedPassword = await bcrypt.hash(req.body.password, 12);
 
     const verifyCode = crypto.randomBytes(32).toString('hex');
